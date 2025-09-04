@@ -5,9 +5,9 @@ pipeline {
   options { timestamps(); disableConcurrentBuilds() }
 
   stages {
-    stage('Checkout') {
+    stage('Checkout (clean)') {
       steps {
-        deleteDir() // limpia workspace
+        deleteDir()  // limpia workspace
         checkout([
           $class: 'GitSCM',
           branches: [[name: '*/main']],
