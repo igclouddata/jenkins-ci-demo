@@ -26,8 +26,14 @@ pipeline {
     }
 
     stage('Unit tests') {
-      steps { sh 'pytest -q --maxfail=1 --disable-warnings' }
-    }
+  steps {
+    sh '''
+      export PYTHONPATH="$WORKSPACE"
+      pytest -q --maxfail=1 --disable-warnings
+    '''
+  }
+}
+
 
     stage('Package') {
       steps {
