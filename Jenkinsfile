@@ -7,7 +7,7 @@ pipeline {
   stages {
     stage('Checkout (clean)') {
       steps {
-        deleteDir()  // limpia workspace
+        deleteDir()
         checkout([
           $class: 'GitSCM',
           branches: [[name: '*/main']],
@@ -26,14 +26,13 @@ pipeline {
     }
 
     stage('Unit tests') {
-  steps {
-    sh '''
-      export PYTHONPATH="$WORKSPACE"
-      pytest -q --maxfail=1 --disable-warnings
-    '''
-  }
-}
-
+      steps {
+        sh '''
+          export PYTHONPATH="$WORKSPACE"
+          pytest -q --maxfail=1 --disable-warnings
+        '''
+      }
+    }
 
     stage('Package') {
       steps {
